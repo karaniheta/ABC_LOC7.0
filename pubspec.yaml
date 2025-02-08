@@ -69,6 +69,11 @@ flutter:
   assets:
     - assets/ambulance.png
     - assets/google icon.png
+    - assets/appointment.png
+    - assets/first-responder.png
+    - assets/history.png
+    - assets/hospital.png
+    - assets/pharmacy.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
