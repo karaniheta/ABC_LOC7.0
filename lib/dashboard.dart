@@ -1,4 +1,6 @@
+import 'package:amburush/pharmas.dart';
 import 'package:flutter/material.dart';
+import 'hospitalGPS.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -170,6 +172,11 @@ class _DashboardState extends State<Dashboard> {
                       title: 'Hospitals Near You',
                       iconAsset: 'assets/hospital.png', // URL of the image
                       onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CurrentLocationScreen()));
+
                         // Navigate to doctor appointment screen
                       },
                     ),
@@ -197,7 +204,12 @@ class _DashboardState extends State<Dashboard> {
                     DashboardButton(
                       title: 'Pharmacies Near You',
                       iconAsset: 'assets/pharmacy.png',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PharmaScreen()));
+                      },
                     ),
                     DashboardButton(
                         title: 'Quick First Aid Solutions',
