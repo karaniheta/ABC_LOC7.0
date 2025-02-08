@@ -1,3 +1,4 @@
+import 'package:amburush/payment.dart';
 import 'package:flutter/material.dart';
 
 class AmbulanceBook extends StatefulWidget {
@@ -10,16 +11,15 @@ class AmbulanceBook extends StatefulWidget {
 class _AmbulanceBookState extends State<AmbulanceBook> {
   String? selectedAmbulanceType;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(10, 78, 159, 1),
-        title: Text('Ambulance Booking',
-        style: TextStyle(
-          color: Colors.white
-        ),),
+        title: Text(
+          'Ambulance Booking',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -59,9 +59,9 @@ class _AmbulanceBookState extends State<AmbulanceBook> {
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-    backgroundColor: Color.fromRGBO(10, 78, 159, 1),
-     // Text color
-  ),
+                  backgroundColor: Color.fromRGBO(10, 78, 159, 1),
+                  // Text color
+                ),
                 onPressed: () {
                   if (selectedAmbulanceType != null) {
                     Navigator.push(
@@ -73,40 +73,38 @@ class _AmbulanceBookState extends State<AmbulanceBook> {
                     );
                   }
                 },
-                child: Text('Book Ambulance',
-                style: TextStyle(
-                  color: Colors.white
-                ),),
+                child: Text(
+                  'Book Ambulance',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
             Expanded(
               child: Center(
-                child: Image.asset('assets/ambulance.png',
-                height: 200,)
-              ),
+                  child: Image.asset(
+                'assets/ambulance.png',
+                height: 200,
+              )),
             ),
             SizedBox(height: 10),
-            
           ],
         ),
       ),
     );
   }
 }
+
 class BookingConfirmationPage extends StatelessWidget {
   final String type;
   const BookingConfirmationPage({super.key, required this.type});
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         backgroundColor: Color.fromRGBO(10, 78, 159, 1),
-        title: Text('Booking Confirmation',
-        style: TextStyle(
-                  color: Colors.white
-                )),
+        backgroundColor: Color.fromRGBO(10, 78, 159, 1),
+        title:
+            Text('Booking Confirmation', style: TextStyle(color: Colors.white)),
       ),
       body: Center(
         child: Column(
@@ -126,16 +124,17 @@ class BookingConfirmationPage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-    backgroundColor: Color.fromRGBO(10, 78, 159, 1),
-     // Text color
-  ),
+                backgroundColor: Color.fromRGBO(10, 78, 159, 1),
+                // Text color
+              ),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PaymentPage()));
               },
-              child: Text('Track',
-              style: TextStyle(
-                color: Colors.white
-              ),),
+              child: Text(
+                'Track',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),

@@ -83,7 +83,7 @@ class _SignupPageState extends State<SignupPage> {
         'uid': uid,
         'role': 'User',
         'points': 0,
-        'address':_addressController.text.trim(),
+        'address': _addressController.text.trim(),
       });
 
       // Navigate to homepage
@@ -127,7 +127,6 @@ class _SignupPageState extends State<SignupPage> {
       setState(() => isLoading = false);
     }
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -135,24 +134,30 @@ class _SignupPageState extends State<SignupPage> {
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.only(bottom: 16.0),
               child: Form(
                 key: _formKey,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const SizedBox(height: 40),
-                      Text('AmbuRush',
-                          style: TextStyle(
-                              fontFamily: 'interB',
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color:  Color.fromRGBO(10, 78, 159, 1))),
-                      const SizedBox(height: 60),
+                      AppBar(
+                        automaticallyImplyLeading: false,
+                        title: Center(
+                          child: Text(
+                            "Sign Up",
+                            style: TextStyle(
+                                fontFamily: 'intersB',
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        backgroundColor: Color.fromRGBO(10, 78, 159, 1),
+                      ),
+                      const SizedBox(height: 15),
                       SizedBox(
-                          height: 180,
+                          height: 160,
                           child: Image.asset('assets/ambulance.png')),
-                      SizedBox(height: 20),
+                      SizedBox(height: 15),
                       TextFormField(
                         controller: _nameController,
                         decoration: const InputDecoration(
@@ -186,7 +191,6 @@ class _SignupPageState extends State<SignupPage> {
                             : null,
                       ),
                       SizedBox(height: 10),
-                     
                       TextFormField(
                         controller: _phoneController,
                         decoration: const InputDecoration(
@@ -204,7 +208,9 @@ class _SignupPageState extends State<SignupPage> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(
+                        height: 10,
+                      ),
                       TextFormField(
                         controller: _addressController,
                         decoration: const InputDecoration(
@@ -213,16 +219,16 @@ class _SignupPageState extends State<SignupPage> {
                         keyboardType: TextInputType.streetAddress,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                    return 'Please enter your address.';
-                  }
-                  if (value.length < 10) {
-                    return 'Address should be at least 10 characters long.';
-                  }
-                  if (!RegExp(r'^[a-zA-Z0-9\s,.-]+$').hasMatch(value)) {
-                    return 'Address contains invalid characters.';
-                  }
-                  return null;
-                },
+                            return 'Please enter your address.';
+                          }
+                          if (value.length < 10) {
+                            return 'Address should be at least 10 characters long.';
+                          }
+                          if (!RegExp(r'^[a-zA-Z0-9\s,.-]+$').hasMatch(value)) {
+                            return 'Address contains invalid characters.';
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 10),
                       InkWell(
@@ -236,7 +242,7 @@ class _SignupPageState extends State<SignupPage> {
                         child: Text(
                           'Already have an account? Login',
                           style:
-                              TextStyle(color: Color(0xFF1E88E5), fontSize: 12),
+                              TextStyle(color: Color(0xFF1E88E5), fontSize: 14),
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -247,8 +253,8 @@ class _SignupPageState extends State<SignupPage> {
                           style: TextStyle(color: Color(0xFFf1f5f5)),
                         ),
                         style: ButtonStyle(
-                            backgroundColor:
-                                WidgetStateProperty.all(Color(0xFF69adb2))),
+                            backgroundColor: WidgetStateProperty.all(
+                                Color.fromRGBO(10, 78, 159, 1))),
                       ),
                       const SizedBox(height: 10),
                       Text('OR'),

@@ -19,11 +19,7 @@ class _NavbarState extends State<BottomNavbar> {
   int _selectedIndex = 0;
   Map<String, dynamic>? userData;
 
-  final List<Widget> pages = [
-    Dashboard(),
-    FeedbackPage(),
-    Profile()
-  ];
+  final List<Widget> pages = [Dashboard(), FeedbackPage(), Profile()];
 
   @override
   void initState() {
@@ -72,7 +68,6 @@ class _NavbarState extends State<BottomNavbar> {
       setState(() {
         userData = null;
       });
-
     } catch (e) {
       print('Error fetching user data: $e');
     }
@@ -89,26 +84,6 @@ class _NavbarState extends State<BottomNavbar> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Guideline()),
-            );
-          },
-          icon: const Icon(Icons.info_outline, color: Colors.black),
-        ),
-        title: const Text(
-          'AmbuRush',
-          style: TextStyle(
-            fontFamily: 'InterB',
-            color: Color.fromRGBO(10, 78, 159, 1),
-          ),
-        ),
-      ),
       body: IndexedStack(
         index: _selectedIndex,
         children: pages,
@@ -133,10 +108,12 @@ class _NavbarState extends State<BottomNavbar> {
               label: 'Profile',
             ),
           ],
-          selectedItemColor: Theme.of(context).bottomNavigationBarTheme.selectedItemColor ??
-              const Color.fromRGBO(10, 78, 159, 1),
-          unselectedItemColor: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor ?? 
-              Colors.grey,
+          selectedItemColor:
+              Theme.of(context).bottomNavigationBarTheme.selectedItemColor ??
+                  const Color.fromRGBO(10, 78, 159, 1),
+          unselectedItemColor:
+              Theme.of(context).bottomNavigationBarTheme.unselectedItemColor ??
+                  Colors.grey,
           backgroundColor: Colors.white,
           elevation: Theme.of(context).bottomNavigationBarTheme.elevation ?? 0,
         ),

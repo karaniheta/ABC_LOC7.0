@@ -38,14 +38,14 @@ class _AccountState extends State<Account> {
         return {'role': 'User', ...userDoc.data()!};
       }
 
-      // Check the 'FoodBank' collection
+      // Check the 'Drivers' collection
       final driverDoc = await FirebaseFirestore.instance
           .collection('Drivers')
           .doc(userId)
           .get();
 
       if (driverDoc.exists) {
-        return {'role': 'driver', ...driverDoc.data()!};
+        return {'role': 'Driver', ...driverDoc.data()!};
       }
 
       // If the user is not found in either collection
@@ -60,11 +60,17 @@ class _AccountState extends State<Account> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Your Account',
-          style: TextStyle(fontFamily: 'interB', color: Colors.black),
+        automaticallyImplyLeading: false,
+        title: Center(
+          child: Text(
+            "Your Account",
+            style: TextStyle(
+                fontFamily: 'intersB',
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+          ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromRGBO(10, 78, 159, 1),
       ),
       body: FutureBuilder<Map<String, dynamic>?>(
         future: userData,
@@ -86,8 +92,8 @@ class _AccountState extends State<Account> {
 
           if (role == 'User') {
             return _buildUserView(data);
-          } else if (role == 'driver') {
-            return _buildFoodBankView(data);
+          } else if (role == 'Driver') {
+            return _buildDriverView(data);
           } else {
             return const Center(child: Text('Unknown role'));
           }
@@ -288,7 +294,7 @@ class _AccountState extends State<Account> {
     );
   }
 
-  Widget _buildFoodBankView(Map<String, dynamic> data) {
+  Widget _buildDriverView(Map<String, dynamic> data) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [

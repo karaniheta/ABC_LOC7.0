@@ -1,7 +1,11 @@
 import 'package:amburush/ambulance/ambulance_book.dart';
+import 'package:amburush/firstaid.dart';
 import 'package:amburush/health_history/health_history.dart';
+import 'package:amburush/hospitalGPS.dart';
+import 'package:amburush/pharmas.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // Add this import for FirebaseAuth
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // Add this import for FirebaseAuth
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -11,9 +15,28 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  static Future<void> logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isLoggedIn', false);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Center(
+          child: Text(
+            "Home",
+            style: TextStyle(
+                fontFamily: 'intersB',
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+          ),
+        ),
+        backgroundColor: Color.fromRGBO(10, 78, 159, 1),
+      ),
+      body: WillPopScope(
         onWillPop: () async {
           return await showDialog(
                 context: context,
@@ -25,7 +48,10 @@ class _DashboardState extends State<Dashboard> {
                   content: Text('Are you sure you want to logout?'),
                   actions: [
                     TextButton(
-                      onPressed: () => Navigator.of(context).pop(true),
+                      onPressed: () async {
+                        await logout();
+                        Navigator.of(context).pop(true);
+                      },
                       child: Text('Yes',
                           style:
                               TextStyle(color: Color.fromRGBO(10, 78, 159, 1))),
@@ -42,9 +68,7 @@ class _DashboardState extends State<Dashboard> {
               ) ??
               false;
         },
-        child: // Updated background color to white
-
-            SingleChildScrollView(
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -79,6 +103,11 @@ class _DashboardState extends State<Dashboard> {
                       title: 'Hospitals Near You',
                       iconAsset: 'assets/hospital.png', // URL of the image
                       onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CurrentLocationScreen()),
+                        );
                         // Navigate to doctor appointment screen
                       },
                     ),
@@ -105,11 +134,13 @@ class _DashboardState extends State<Dashboard> {
                       title: 'Upload Health History',
                       iconAsset: 'assets/history.png', // URL of the image
                       onTap: () {
-                        String uid = FirebaseAuth.instance.currentUser?.uid ?? '';
+                        String uid =
+                            FirebaseAuth.instance.currentUser?.uid ?? '';
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HealthHistoryPage(uid: uid)),
+                              builder: (context) =>
+                                  HealthHistoryPage(uid: uid)),
                         );
                         // Navigate to chat application screen
                       },
@@ -117,18 +148,30 @@ class _DashboardState extends State<Dashboard> {
                     DashboardButton(
                       title: 'Pharmacies Near You',
                       iconAsset: 'assets/pharmacy.png',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PharmaScreen()));
+                      },
                     ),
                     DashboardButton(
                         title: 'Quick First Aid Solutions',
                         iconAsset: 'assets/first-responder.png',
-                        onTap: () {}),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChatScreen()));
+                        }),
                   ],
                 ),
               ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 

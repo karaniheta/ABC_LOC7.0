@@ -1,8 +1,6 @@
-import 'package:amburush/auth/login.dart';
-
-import 'package:amburush/dashboard.dart';
 import 'package:amburush/emergency/emergency.dart';
 import 'package:amburush/firebase_options.dart';
+//import 'package:amburush/payment.dart';
 // import 'package:amburush/home/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +17,7 @@ class AmbuRushApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'AmbuRush',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-      ),
       home: Emergency(),
     );
   }

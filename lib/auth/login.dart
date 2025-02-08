@@ -81,20 +81,24 @@ class _LoginPageState extends State<LoginPage> {
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.only(bottom: 16),
               child: Form(
                 key: _formKey,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const SizedBox(height: 40),
-                      Text(
-                        'AmbuRush',
-                        style: TextStyle(
-                            fontFamily: 'interB',
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF69adb2)),
+                      AppBar(
+                        automaticallyImplyLeading: false,
+                        title: Center(
+                          child: Text(
+                            "Login",
+                            style: TextStyle(
+                                fontFamily: 'intersB',
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        backgroundColor: Color.fromRGBO(10, 78, 159, 1),
                       ),
                       const SizedBox(height: 60),
                       SizedBox(
@@ -159,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                           'Don\'t have an account? Sign Up',
                           style: TextStyle(
                             color: Color(0xFF1E88E5),
-                            fontSize: 12,
+                            fontSize: 14,
                           ),
                         ),
                       ),
@@ -168,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: _login,
                         style: ButtonStyle(
                           backgroundColor: WidgetStateProperty.all(
-                            const Color(0xFF69adb2),
+                            const Color.fromRGBO(10, 78, 159, 1),
                           ),
                         ),
                         child: const Text(

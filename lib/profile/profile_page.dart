@@ -14,55 +14,66 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(18.0),
-      child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              height: 220,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/man.png'),
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Center(
+          child: Text(
+            "Profile",
+            style: TextStyle(
+                fontFamily: 'intersB',
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+          ),
+        ),
+        backgroundColor: Color.fromRGBO(10, 78, 159, 1),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                height: 220,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/man.png'),
+                  ),
                 ),
               ),
-            ),
-            // Text()
-            SizedBox(
-              height: 40,
-            ),
-            Profilebuttons(
-                text: 'Your Account',
-                icon: SuperIcons.bs_person,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Account()),
-                  );
-                }),
-            SizedBox(
-              height: 10,
-            ),
-            
-            
-            
-            Profilebuttons(
-                text: 'About', icon: SuperIcons.bs_info_circle, onTap: ()=>Navigator.push(context,MaterialPageRoute(builder: (context)=>AboutPage()))),
-
-            SizedBox(
-              height: 10,
-            ),
-
-            Profilebuttons(
-                text: 'Log out',
-                icon: SuperIcons.bx_power_off,
-                onTap: () => _showLogoutConfirmationDialog(context)),
-          ],
+              SizedBox(
+                height: 40,
+              ),
+              Profilebuttons(
+                  text: 'Your Account',
+                  icon: SuperIcons.bs_person,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Account()),
+                    );
+                  }),
+              SizedBox(
+                height: 10,
+              ),
+              Profilebuttons(
+                  text: 'About',
+                  icon: SuperIcons.bs_info_circle,
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AboutPage()))),
+              SizedBox(
+                height: 10,
+              ),
+              Profilebuttons(
+                  text: 'Log out',
+                  icon: SuperIcons.bx_power_off,
+                  onTap: () => _showLogoutConfirmationDialog(context)),
+            ],
+          ),
         ),
       ),
     );
@@ -99,7 +110,6 @@ void _showLogoutConfirmationDialog(BuildContext context) {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        // contentPadding: EdgeInsets.only(left: 20,right: 20),
         title: Center(
             child: Text(
           'Confirm Logout',
@@ -166,7 +176,6 @@ Widget Profilebuttons(
                     text,
                     style: TextStyle(
                         fontFamily: 'interR',
-                        // fontWeight: FontWeight.w500,
                         color: Color.fromRGBO(10, 78, 159, 1)),
                   )),
             ],
