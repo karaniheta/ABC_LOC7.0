@@ -1,4 +1,6 @@
 import 'package:amburush/auth/signup_page.dart';
+import 'package:amburush/bottom_nav/bottom_nav.dart';
+import 'package:amburush/dashboard.dart';
 import 'package:amburush/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:super_icons/super_icons.dart';
@@ -32,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
     if (isLoggedIn) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => BottomNavbar()),
       );
     }
   }
@@ -69,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => HomePage()),
+      MaterialPageRoute(builder: (context) => BottomNavbar()),
     );
   }
 

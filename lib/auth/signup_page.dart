@@ -1,5 +1,6 @@
 import 'package:amburush/auth.dart';
 import 'package:amburush/auth/login.dart';
+import 'package:amburush/bottom_nav/bottom_nav.dart';
 import 'package:amburush/dashboard.dart';
 // import 'package:amburush/home/home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -48,7 +49,7 @@ class _SignupPageState extends State<SignupPage> {
       // Navigate to Homepage after successful login
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Dashboard()),
+        MaterialPageRoute(builder: (context) => BottomNavbar()),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -88,7 +89,7 @@ class _SignupPageState extends State<SignupPage> {
       // Navigate to homepage
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Dashboard()),
+        MaterialPageRoute(builder: (context) => BottomNavbar()),
       );
 
       ScaffoldMessenger.of(context).showSnackBar(

@@ -1,6 +1,4 @@
-import 'package:amburush/pharmas.dart';
 import 'package:flutter/material.dart';
-import 'hospitalGPS.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -13,131 +11,37 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        return await showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: Text(
-                  'Confirm Logout',
-                  style: TextStyle(color: Color.fromRGBO(10, 78, 159, 1)),
-                ),
-                content: Text('Are you sure you want to logout?'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(true),
-                    child: Text('Yes',
-                        style:
-                            TextStyle(color: Color.fromRGBO(10, 78, 159, 1))),
+        onWillPop: () async {
+          return await showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text(
+                    'Confirm Logout',
+                    style: TextStyle(color: Color.fromRGBO(10, 78, 159, 1)),
                   ),
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(false),
-                    child: Text(
-                      'No',
-                      style: TextStyle(color: Color.fromRGBO(10, 78, 159, 1)),
+                  content: Text('Are you sure you want to logout?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(true),
+                      child: Text('Yes',
+                          style:
+                              TextStyle(color: Color.fromRGBO(10, 78, 159, 1))),
                     ),
-                  ),
-                ],
-              ),
-            ) ??
-            false;
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'AmbuRush',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          backgroundColor: Color.fromARGB(255, 55, 121, 201),
-          iconTheme: IconThemeData(color: Colors.white), // Set icon color
-        ),
-        backgroundColor: Colors.white, // Updated background color to white
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(
-                      255, 55, 121, 201), // Header background color
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Hello!',
-                      style: TextStyle(
-                        fontSize: 22.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(height: 10.0),
-                    LinearProgressIndicator(
-                      value:
-                          0.75, // Placeholder for the completion progress (75%)
-                      backgroundColor: Colors.white,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        Color.fromARGB(255, 0, 32, 63),
-                      ), // Progress bar color
-                    ),
-                    SizedBox(height: 10.0),
-                    Text(
-                      'Profile Completion: 75%', // Update with actual progress
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: Colors.white,
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(false),
+                      child: Text(
+                        'No',
+                        style: TextStyle(color: Color.fromRGBO(10, 78, 159, 1)),
                       ),
                     ),
                   ],
                 ),
-              ),
-              ListTile(
-                leading: Image.network(
-                  'https://img.icons8.com/?size=60&id=sVl5GKPpWl5z&format=png',
-                  width: 24, // Adjust the width as needed-
-                  height: 24, // Adjust the height as needed
-                ),
-                title: Text(
-                  'Edit Profile',
-                  style: TextStyle(color: Color.fromARGB(255, 0, 32, 63)),
-                ),
-                onTap: () {
-                  // Navigate to edit profile screen
-                },
-              ),
-              ListTile(
-                leading: Image.network(
-                  'https://img.icons8.com/?size=48&id=zLUcOB9hQUB9&format=png',
-                  width: 18, // Adjust the width as needed
-                  height: 18, // Adjust the height as needed
-                ),
-                title: Text(
-                  'View Schedule',
-                  style: TextStyle(color: Color.fromARGB(255, 0, 32, 63)),
-                ),
-                onTap: () {
-                  // Navigate to view schedule screen
-                },
-              ),
-              ListTile(
-                leading: Image.network(
-                  'https://img.icons8.com/?size=48&id=13951&format=png',
-                  width: 24, // Adjust the width as needed
-                  height: 24, // Adjust the height as needed
-                ),
-                title: Text(
-                  'Settings',
-                  style: TextStyle(color: Color.fromARGB(255, 0, 32, 63)),
-                ),
-                onTap: () {
-                  // Navigate to settings screen
-                },
-              ),
-            ],
-          ),
-        ),
+              ) ??
+              false;
+        },
+        child: // Updated background color to white
 
-        body: SingleChildScrollView(
+            SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -172,11 +76,6 @@ class _DashboardState extends State<Dashboard> {
                       title: 'Hospitals Near You',
                       iconAsset: 'assets/hospital.png', // URL of the image
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CurrentLocationScreen()));
-
                         // Navigate to doctor appointment screen
                       },
                     ),
@@ -204,12 +103,7 @@ class _DashboardState extends State<Dashboard> {
                     DashboardButton(
                       title: 'Pharmacies Near You',
                       iconAsset: 'assets/pharmacy.png',
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PharmaScreen()));
-                      },
+                      onTap: () {},
                     ),
                     DashboardButton(
                         title: 'Quick First Aid Solutions',
@@ -429,9 +323,7 @@ class _DashboardState extends State<Dashboard> {
               ],
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
 
