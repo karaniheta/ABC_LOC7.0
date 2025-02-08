@@ -26,6 +26,34 @@ class _SignorgPageState extends State<SignorgPage> {
   final TextEditingController _driverExperienceController = TextEditingController();
   final TextEditingController _driverLicenseController = TextEditingController();
   bool isLoading = false;
+  Future<void> signinwithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) return; // User canceled the login
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // Sign in to Firebase with the Google credential
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      // Navigate to Homepage after successful login
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => BottomNavbar()),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Google sign-in failed: $e')),
+      );
+    }
+  }
+
 
   void _signUp() async {
     if (!_formKey.currentState!.validate()) return;
@@ -205,10 +233,36 @@ class _SignorgPageState extends State<SignorgPage> {
                         style: ButtonStyle(
                             backgroundColor: WidgetStateProperty.all(
                                 Color.fromRGBO(10, 78, 159, 1))),
-                      ),
+                      ),const SizedBox(height: 10),
+                      Text('OR'),
+                      const SizedBox(height: 20),
+                      Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () async {
+                                final auth =
+                                    Provider.of<Auth>(context, listen: false);
+                                try {
+                                  await auth.signinwithGoogle();
+                                } catch (e) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content:
+                                            Text('Google sign-in failed: $e')),
+                                  );
+                                }
+                              },
+                              child: SizedBox(
+                                  height: 35,
+                                  width: 35,
+                                  child: Image.asset('assets/google icon.png')),
+                            ),
+                            SizedBox(width: 20),
+
                     ],
-                  ),
-                ),
+                  ),]
+                )),
               ),
             ),
     );

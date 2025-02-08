@@ -1,6 +1,7 @@
 import 'package:amburush/about/about.dart';
 import 'package:amburush/account/account.dart';
 import 'package:amburush/auth/login.dart';
+import 'package:amburush/lan_settings.dart/Settingsscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +66,14 @@ class _ProfileState extends State<Profile> {
                   icon: SuperIcons.bs_info_circle,
                   onTap: () => Navigator.push(context,
                       MaterialPageRoute(builder: (context) => AboutPage()))),
+                      SizedBox(
+                height: 10,
+              ),
+              Profilebuttons(
+                  text: 'Change Language',
+                  icon: SuperIcons.bx_power_off,
+                  onTap: () =>  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AboutPage()))),
               SizedBox(
                 height: 10,
               ),
@@ -72,6 +81,7 @@ class _ProfileState extends State<Profile> {
                   text: 'Log out',
                   icon: SuperIcons.bx_power_off,
                   onTap: () => _showLogoutConfirmationDialog(context)),
+                  
             ],
           ),
         ),

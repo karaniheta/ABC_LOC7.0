@@ -2,7 +2,9 @@ import 'package:amburush/auth/signup_page.dart';
 import 'package:amburush/bottom_nav/bottom_nav.dart';
 import 'package:amburush/dashboard.dart';
 import 'package:amburush/home/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:super_icons/super_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // Import SharedPreferences
 
@@ -74,6 +76,38 @@ class _LoginPageState extends State<LoginPage> {
       MaterialPageRoute(builder: (context) => BottomNavbar()),
     );
   }
+  Future<void> signinwithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) return; // User canceled the login
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // Sign in to Firebase with the Google credential
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      // Navigate to Homepage after successful login
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const BottomNavbar()),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Google sign-in failed: $e')),
+        );
+      }
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
