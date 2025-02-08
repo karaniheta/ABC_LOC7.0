@@ -1,16 +1,15 @@
+// Adjust the endpoint if needed
+// final apiKey =
+//     'AIzaSyA1NgSurX8cHGpdsBSs0SwTtRhEaoNrWgI'; // Replace with your actual API key
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 const apiKey = 'AIzaSyA1NgSurX8cHGpdsBSs0SwTtRhEaoNrWgI';
 
-void main() {
-  Gemini.init(apiKey: apiKey, enableDebugging: true);
-}
-
+@override
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
-
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -26,6 +25,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
     _speechToText = stt.SpeechToText();
+    Gemini.init(apiKey: apiKey, enableDebugging: true);
   }
 
   @override
@@ -33,12 +33,8 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "BayMax AI",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+          "BayMax AI - Your Personalized Health Assistant",
+          style: TextStyle(color: Colors.white, fontSize: 20),
         ),
         backgroundColor: Color.fromRGBO(10, 78, 159, 1),
       ),
@@ -66,32 +62,13 @@ class _ChatScreenState extends State<ChatScreen> {
                         ? Colors.red
                         : Color.fromRGBO(10, 78, 159, 1),
                   ),
-                  onPressed: () async {
-                    if (_isListening) {
-                      _speechToText.stop();
-                      setState(() {
-                        _isListening = false;
-                      });
-                    } else {
-                      final isAvailable = await _speechToText.initialize();
-                      if (isAvailable) {
-                        _speechToText.listen(
-                          onResult: (result) {
-                            _messageController.text = result.recognizedWords;
-                          },
-                        );
-                        setState(() {
-                          _isListening = true;
-                        });
-                      }
-                    }
-                  },
+                  onPressed: _toggleListening,
                 ),
                 Expanded(
                   child: TextField(
                     controller: _messageController,
                     decoration: InputDecoration(
-                      hintText: "Ask BayMax about any sudden health issue...",
+                      hintText: "Ask BayMax AI about health concerns...",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30)),
                       fillColor: Colors.white,
@@ -121,21 +98,14 @@ class _ChatScreenState extends State<ChatScreen> {
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         margin: message.isUser
             ? EdgeInsets.only(left: 50)
-            : EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.6),
+            : EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.2),
         constraints:
-            BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
+            BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.8),
         decoration: BoxDecoration(
           color: message.isUser
               ? Color.fromRGBO(10, 78, 159, 1)
               : Colors.grey.shade300,
           borderRadius: BorderRadius.circular(30),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade300,
-              blurRadius: 4,
-              spreadRadius: 1,
-            )
-          ],
         ),
         child: Text(
           message.text.replaceAll(RegExp(r'\*\*'), ''),
@@ -200,7 +170,7 @@ class _ChatScreenState extends State<ChatScreen> {
     try {
       final response = await Gemini.instance.prompt(parts: [
         Part.text(
-            'You are BayMax, an emergency helpful AI which will provide temporary solutions to health problems while the ambulance arrives like CPR, chest pumps with hands etc. User query: $userQuery'),
+            'You are BayMax AI, a personalized health assistant. Provide information about maternal health, diabetes, hypertension, cardiovascular disease, asthma, arthritis, cancer, weight management, and emergency health situations. User query: $userQuery'),
       ]);
 
       if (response != null && response.output != null) {
@@ -209,8 +179,30 @@ class _ChatScreenState extends State<ChatScreen> {
         return "I'm sorry, I don’t have an answer for that.";
       }
     } catch (e) {
-      print(e);
       return "Error occurred while fetching response.";
+    }
+  }
+
+  void _toggleListening() async {
+    if (_isListening) {
+      _speechToText.stop();
+      setState(() {
+        _isListening = false;
+      });
+    } else {
+      bool available = await _speechToText.initialize();
+      if (available) {
+        setState(() {
+          _isListening = true;
+        });
+
+        // Start listening and update the TextField dynamically as the voice is recognized
+        _speechToText.listen(onResult: (result) {
+          setState(() {
+            _messageController.text = result.recognizedWords;
+          });
+        });
+      }
     }
   }
 }
