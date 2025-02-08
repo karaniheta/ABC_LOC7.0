@@ -1,6 +1,7 @@
 import 'package:amburush/auth.dart';
 import 'package:amburush/auth/login.dart';
-import 'package:amburush/home/home_page.dart';
+import 'package:amburush/dashboard.dart';
+// import 'package:amburush/home/home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class _SignupPageState extends State<SignupPage> {
       // Navigate to Homepage after successful login
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => Dashboard()),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -87,7 +88,7 @@ class _SignupPageState extends State<SignupPage> {
       // Navigate to homepage
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => Dashboard()),
       );
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -139,12 +140,12 @@ class _SignupPageState extends State<SignupPage> {
                   child: Column(
                     children: [
                       const SizedBox(height: 40),
-                      Text('ANVAYA',
+                      Text('AmbuRush',
                           style: TextStyle(
                               fontFamily: 'interB',
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFF69adb2))),
+                              color:  Color.fromRGBO(10, 78, 159, 1))),
                       const SizedBox(height: 60),
                       SizedBox(
                           height: 180,
