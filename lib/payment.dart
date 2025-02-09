@@ -59,12 +59,24 @@ class _PaymentPageState extends State<PaymentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Razorpay Payment'),
+        title: Text(
+          'Razorpay Payment',
+          style: TextStyle(
+              fontFamily: 'intersB',
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Color.fromRGBO(10, 78, 159, 1),
       ),
       body: Center(
         child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Color.fromRGBO(10, 78, 159, 1)),
           onPressed: openCheckout,
-          child: Text('Pay with Razorpay'),
+          child: Text(
+            'Pay with Razorpay',
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
         ),
       ),
     );
