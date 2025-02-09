@@ -73,7 +73,7 @@ class _ProfileState extends State<Profile> {
                   text: 'Change Language',
                   icon: SuperIcons.bx_power_off,
                   onTap: () =>  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AboutPage()))),
+                      MaterialPageRoute(builder: (context) => Settingscreen()))),
               SizedBox(
                 height: 10,
               ),

@@ -1,4 +1,5 @@
 import 'package:amburush/auth/signup_page.dart';
+import 'package:amburush/auth/user_type.dart';
 import 'package:amburush/bottom_nav/bottom_nav.dart';
 import 'package:amburush/dashboard.dart';
 import 'package:amburush/home/home_page.dart';
@@ -189,7 +190,7 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const SignupPage(),
+                              builder: (context) => const Usertype(),
                             ),
                           );
                         },
@@ -218,7 +219,7 @@ class _LoginPageState extends State<LoginPage> {
                       const Text('OR'),
                       const SizedBox(height: 20),
                       InkWell(
-                        onTap: () {}, // Add Google login function here
+                        onTap: signinwithGoogle, // Add Google login function here
                         child: SizedBox(
                           height: 35,
                           width: 35,

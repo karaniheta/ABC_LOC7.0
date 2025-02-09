@@ -5,6 +5,7 @@ import 'package:amburush/hospitalGPS.dart';
 import 'package:amburush/pharmas.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // Add this import for FirebaseAuth
 
 class Dashboard extends StatefulWidget {
@@ -75,7 +76,7 @@ class _DashboardState extends State<Dashboard> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'Hello!',
+                  'Hello!'.tr,
                   style: TextStyle(
                     fontSize: 22.0,
                     fontWeight: FontWeight.bold,
@@ -85,7 +86,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 SizedBox(height: 10.0),
                 Text(
-                  'How can we assist you today?',
+                  'How can we assist you today?'.tr,
                   style: TextStyle(
                     fontSize: 16.0,
                     color: Colors.grey,
@@ -100,7 +101,7 @@ class _DashboardState extends State<Dashboard> {
                   physics: NeverScrollableScrollPhysics(),
                   children: [
                     DashboardButton(
-                      title: 'Hospitals Near You',
+                      title: 'Hospitals Near You'.tr,
                       iconAsset: 'assets/hospital.png', // URL of the image
                       onTap: () {
                         Navigator.push(
@@ -112,14 +113,14 @@ class _DashboardState extends State<Dashboard> {
                       },
                     ),
                     DashboardButton(
-                      title: 'Book Appointments',
+                      title: 'Book Appointments'.tr,
                       iconAsset: 'assets/appointment.png', // URL of the image
                       onTap: () {
                         // Navigate to lab test booking screen
                       },
                     ),
                     DashboardButton(
-                      title: 'Ambulance Booking',
+                      title: 'Ambulance Booking'.tr,
                       iconAsset: 'assets/ambulance.png', // URL of the image
                       onTap: () {
                         Navigator.push(
@@ -131,7 +132,7 @@ class _DashboardState extends State<Dashboard> {
                       },
                     ),
                     DashboardButton(
-                      title: 'Upload Health History',
+                      title: 'Upload Health History'.tr,
                       iconAsset: 'assets/history.png', // URL of the image
                       onTap: () {
                         String uid =
@@ -146,7 +147,7 @@ class _DashboardState extends State<Dashboard> {
                       },
                     ),
                     DashboardButton(
-                      title: 'Pharmacies Near You',
+                      title: 'Pharmacies Near You'.tr,
                       iconAsset: 'assets/pharmacy.png',
                       onTap: () {
                         Navigator.push(
@@ -156,7 +157,7 @@ class _DashboardState extends State<Dashboard> {
                       },
                     ),
                     DashboardButton(
-                        title: 'Quick First Aid Solutions',
+                        title: 'Quick First Aid Solutions'.tr,
                         iconAsset: 'assets/first-responder.png',
                         onTap: () {
                           Navigator.push(
